@@ -19,12 +19,8 @@
         <span>$</span>
         <span id="current_price"></span>
       </div>
-      <div id="open_div">
-        <span>Open:</span>
-        <span id="open"></span>
-      </div>
       <div id="change_div">
-        <span>Change:</span>
+        <span id="change_icon"></span>
         <span id="percent_change"></span>
       </div>
     </div>
@@ -47,12 +43,16 @@
               data[symbolIndex].metadata.name;
             document.getElementById("current_price").innerHTML =
               data[symbolIndex].price.toFixed(2);
-            document.getElementById("open").innerHTML =
-              data[symbolIndex].open.toFixed(2);
-            document.getElementById("percent_change").innerHTML =
-              data[symbolIndex].change.toFixed(2) + "%";
+            var change = data[symbolIndex].change.toFixed(2);
+            document.getElementById("percent_change").innerHTML = change + "%";
+            if (change >= 0) {
+              document.getElementById("change_icon").innerHTML = "▲";
+              document.getElementById("change_icon").style.color = "green";
+            } else {
+              document.getElementById("change_icon").innerHTML = "▼";
+              document.getElementById("change_icon").style.color = "red";
+            }
             document.getElementById("price_div").style.display = "flex";
-            document.getElementById("open_div").style.display = "flex";
             document.getElementById("change_div").style.display = "flex";
             return;
           }
