@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="application/json; charset=UTF-8" />
+    <title>mrkts.fyi</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div>
+      <span id="symbol"></span>
+    </div>
+    <div>
+      <span id="name"></span>
+    </div>
+    <div id="price_div">
+      <span>$</span>
+      <span id="current_price"></span>
+    </div>
+    <div id="open_div">
+      <span>open</span>
+      <span id="open"></span>
+    </div>
+    <div id="change_div">
+      <span>change:</span>
+      <span id="percent_change"></span>
+    </div>
+    <script>
+      var queryString = window.location.search;
+      var urlParams = new URLSearchParams(queryString);
+      var symbol = urlParams.get("s");
+
+      fetch("https://data.voura.com/market-data.json")
+        .then(async function (response) {
+          var data = await response.json();
+          if (symbol.length > 0) {
+            var symbolIndex = data.findIndex(
+              (ticker) => ticker.symbol === symbol
+            );
+            document.getElementById("symbol").innerHTML = symbol;
+            document.getElementsByTagName("title")[0].innerHTML =
+              symbol + " | mrkts.fyi";
+            document.getElementById("name").innerHTML =
+              data[symbolIndex].metadata.name;
+            document.getElementById("current_price").innerHTML =
+              data[symbolIndex].price.toFixed(2);
+            document.getElementById("open").innerHTML =
+              data[symbolIndex].open.toFixed(2);
+            document.getElementById("percent_change").innerHTML =
+              data[symbolIndex].change.toFixed(2) + "%";
+            document.getElementById("price_div").style.display = "auto";
+            document.getElementById("open_div").style.display = "auto";
+            document.getElementById("change_div").style.display = "auto";
+            return;
+          }
+          throw new Error();
+        })
+        .catch(function (err) {
+          document.getElementById("symbol").innerHTML = "not found";
+        });
+    </script>
+  </body>
+</html>

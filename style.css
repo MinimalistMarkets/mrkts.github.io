@@ -1,0 +1,53 @@
+body {
+    background-color: #222;
+    color: #fff;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+span {
+    font-size: 1em;
+}
+
+#price_div {
+    display: none;
+}
+
+#open_div {
+    display: none;
+}
+
+#change_div {
+    display: none;
+}
+
+#symbol {
+    width: 100px;
+}
+
+#name {
+    width: 200px;
+}
+
+#current_price {
+    width: 100px;
+}
+
+#open {
+    width: 100px;
+}
+
+#percent_change {
+    width: 100px;
+}
