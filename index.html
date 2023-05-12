@@ -8,10 +8,14 @@
   </head>
   <body>
     <div class="stock_info">
+      <div class="search">
+        <input type="text" maxlength="5" id="search" />
+        <input type="submit" id="submit" value="&#x1F50E;" onclick="search()" />
+      </div>
       <div>
         <span id="symbol"></span>
       </div>
-      <div>
+      <div id="name_div">
         <span id="name"></span>
       </div>
       <span>---</span>
@@ -25,6 +29,39 @@
       </div>
     </div>
     <script>
+      function update(document, symbol, data) {
+        document.getElementById("symbol").innerHTML = symbol;
+        document.getElementsByTagName("title")[0].innerHTML =
+          symbol + " | mrkts.fyi";
+        document.getElementById("name").innerHTML =
+          data[symbolIndex].metadata.name;
+        document.getElementById("current_price").innerHTML =
+          data[symbolIndex].price.toFixed(2);
+        var change = data[symbolIndex].change.toFixed(2);
+        document.getElementById("percent_change").innerHTML = change + "%";
+        if (change >= 0) {
+          document.getElementById("change_icon").innerHTML = "▲";
+          document.getElementById("change_icon").style.color = "green";
+        } else {
+          document.getElementById("change_icon").innerHTML = "▼";
+          document.getElementById("change_icon").style.color = "red";
+        }
+        document.getElementById("price_div").style.display = "flex";
+        document.getElementById("change_div").style.display = "flex";
+      }
+
+      function search() {
+        let srchString = "";
+        var searchField = document
+          .getElementById("search")
+          .value.trim()
+          .toUpperCase();
+        if (searchField.length > 0) {
+          srchString = "?s=" + searchField;
+        }
+        window.location.replace(window.location.origin + srchString);
+      }
+
       var queryString = window.location.search;
       var urlParams = new URLSearchParams(queryString);
       var symbol = urlParams.get("s");
@@ -36,24 +73,11 @@
             var symbolIndex = data.findIndex(
               (ticker) => ticker.symbol === symbol
             );
-            document.getElementById("symbol").innerHTML = symbol;
-            document.getElementsByTagName("title")[0].innerHTML =
-              symbol + " | mrkts.fyi";
-            document.getElementById("name").innerHTML =
-              data[symbolIndex].metadata.name;
-            document.getElementById("current_price").innerHTML =
-              data[symbolIndex].price.toFixed(2);
-            var change = data[symbolIndex].change.toFixed(2);
-            document.getElementById("percent_change").innerHTML = change + "%";
-            if (change >= 0) {
-              document.getElementById("change_icon").innerHTML = "▲";
-              document.getElementById("change_icon").style.color = "green";
-            } else {
-              document.getElementById("change_icon").innerHTML = "▼";
-              document.getElementById("change_icon").style.color = "red";
+            if (symbolIndex === -1) {
+              document.getElementById("symbol").innerHTML = "not found";
+              return;
             }
-            document.getElementById("price_div").style.display = "flex";
-            document.getElementById("change_div").style.display = "flex";
+            update(document, symbol, data);
             return;
           }
           throw new Error();

@@ -6,12 +6,39 @@ body {
 }
 
 .stock_info {
-    margin-top: 10px;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     justify-content: center;
     align-items: center;
+}
+
+.search {
+    margin-bottom: 10px;
+}
+
+#search {
+    font-family: "Andale Mono", monospace;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    width: 70px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+#submit {
+    padding: 3px;
+    font-size: 18px;
+    background: #fff;
+    border-radius: 5px;
+    border: none;
+}
+
+#name_div {
+    margin-bottom: 10px;
 }
 
 #price_div {
@@ -25,10 +52,10 @@ body {
     margin-bottom: 5px;
 }
 
-#symbol {
-    margin-bottom: 5px;
+#change_icon {
+    margin-right: 5px;
 }
 
-#name {
-    margin-bottom: 10px;
+#symbol {
+    margin-bottom: 5px;
 }
