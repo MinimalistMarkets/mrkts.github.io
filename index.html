@@ -18,11 +18,11 @@
       <span id="current_price"></span>
     </div>
     <div id="open_div">
-      <span>open</span>
+      <span>Open:</span>
       <span id="open"></span>
     </div>
     <div id="change_div">
-      <span>change:</span>
+      <span>Change:</span>
       <span id="percent_change"></span>
     </div>
     <script>
@@ -48,9 +48,9 @@
               data[symbolIndex].open.toFixed(2);
             document.getElementById("percent_change").innerHTML =
               data[symbolIndex].change.toFixed(2) + "%";
-            document.getElementById("price_div").style.display = "auto";
-            document.getElementById("open_div").style.display = "auto";
-            document.getElementById("change_div").style.display = "auto";
+            document.getElementById("price_div").style.display = "flex";
+            document.getElementById("open_div").style.display = "flex";
+            document.getElementById("change_div").style.display = "flex";
             return;
           }
           throw new Error();
