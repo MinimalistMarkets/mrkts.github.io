@@ -29,27 +29,6 @@
       </div>
     </div>
     <script>
-      function update(document, symbol, data) {
-        document.getElementById("symbol").innerHTML = symbol;
-        document.getElementsByTagName("title")[0].innerHTML =
-          symbol + " | mrkts.fyi";
-        document.getElementById("name").innerHTML =
-          data[symbolIndex].metadata.name;
-        document.getElementById("current_price").innerHTML =
-          data[symbolIndex].price.toFixed(2);
-        var change = data[symbolIndex].change.toFixed(2);
-        document.getElementById("percent_change").innerHTML = change + "%";
-        if (change >= 0) {
-          document.getElementById("change_icon").innerHTML = "▲";
-          document.getElementById("change_icon").style.color = "green";
-        } else {
-          document.getElementById("change_icon").innerHTML = "▼";
-          document.getElementById("change_icon").style.color = "red";
-        }
-        document.getElementById("price_div").style.display = "flex";
-        document.getElementById("change_div").style.display = "flex";
-      }
-
       function search() {
         let srchString = "";
         var searchField = document
@@ -77,7 +56,24 @@
               document.getElementById("symbol").innerHTML = "not found";
               return;
             }
-            update(document, symbol, data);
+            document.getElementById("symbol").innerHTML = symbol;
+            document.getElementsByTagName("title")[0].innerHTML =
+              symbol + " | mrkts.fyi";
+            document.getElementById("name").innerHTML =
+              data[symbolIndex].metadata.name;
+            document.getElementById("current_price").innerHTML =
+              data[symbolIndex].price.toFixed(2);
+            var change = data[symbolIndex].change.toFixed(2);
+            document.getElementById("percent_change").innerHTML = change + "%";
+            if (change >= 0) {
+              document.getElementById("change_icon").innerHTML = "▲";
+              document.getElementById("change_icon").style.color = "green";
+            } else {
+              document.getElementById("change_icon").innerHTML = "▼";
+              document.getElementById("change_icon").style.color = "red";
+            }
+            document.getElementById("price_div").style.display = "flex";
+            document.getElementById("change_div").style.display = "flex";
             return;
           }
           throw new Error();
