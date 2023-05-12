@@ -1,5 +1,5 @@
 body {
-    font-family: sans-serif;
+    font-family: "Andale Mono", monospace;
     background-color: #222;
     color: #fff;
     margin: 0;
@@ -16,14 +16,18 @@ body {
 
 #price_div {
     display: none;
+    margin-bottom: 5px;
+    margin-top: 10px;
 }
 
 #open_div {
     display: none;
+    margin-bottom: 5px;
 }
 
 #change_div {
     display: none;
+    margin-bottom: 5px;
 }
 
 #symbol {
@@ -31,17 +35,5 @@ body {
 }
 
 #name {
-    margin-bottom: 5px;
-}
-
-#price {
-    margin-bottom: 5px;
-}
-
-#open {
-    margin-bottom: 5px;
-}
-
-#percent_change {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
